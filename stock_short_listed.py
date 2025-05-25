@@ -59,10 +59,16 @@ def is_bullish(df):
     latest, prev = df.iloc[-1], df.iloc[-2]
 
     try:
-        candle_ok = (latest['Close'] > (latest['Low'] + 0.75 * (latest['High'] - latest['Low']))) and (latest['Close'] > prev['Close'])
-        ema_ok = (latest["EMA_20"] > latest["EMA_50"] > latest["EMA_200"])
-        rsi_ok = latest["RSI"] > 50
-        macd_ok = latest["MACD"] > latest["Signal"] and prev["MACD"] < prev["Signal"]
+        # candle_ok = (latest['Close'] > (latest['Low'] + 0.75 * (latest['High'] - latest['Low']))) and (latest['Close'] > prev['Close'])
+        # ema_ok = (latest["EMA_20"] > latest["EMA_50"] > latest["EMA_200"])
+        # rsi_ok = latest["RSI"] > 45
+        # macd_ok = latest["MACD"] > latest["Signal"] and prev["MACD"] < prev["Signal"]
+
+        candle_ok = (latest['Close'] > (latest['Low'] + 0.5 * (latest['High'] - latest['Low']))) and (latest['Close'] >= prev['Close'] * 0.98)
+        ema_ok = (latest["EMA_20"] > latest["EMA_50"] * 0.99) and (latest["EMA_50"] > latest["EMA_200"] * 0.98)
+        rsi_ok = latest["RSI"] > 45
+        macd_ok = (latest["MACD"] > latest["Signal"]) and ((latest["MACD"] - latest["Signal"]) > -0.1)
+
 
         return all([candle_ok, ema_ok, rsi_ok, macd_ok])
     except:

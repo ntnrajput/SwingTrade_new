@@ -60,6 +60,7 @@ def identify_strong_reversal_points(df):
     return strong_levels
 
 def calculate_support_resistance(df, symbol):
+    
     df_symbol = df[df['Stock'] == symbol]
 
     if df_symbol.empty:
@@ -71,16 +72,16 @@ def calculate_support_resistance(df, symbol):
 
 if __name__ == "__main__":
    
-    df = stock_data_fetch.fetch_stock_data()
-    print(df)
+    df, symbols = stock_data_fetch.fetch_stock_data()
 
     if "Stock" not in df.columns:
         print("Error: Column 'Stock' not found in DataFrame")
         sys.exit(1)
 
-    results = [calculate_support_resistance(df, symbol) for symbol in stock_symbols]
+    results = [calculate_support_resistance(df, symbol) for symbol in symbols]
 
     df_results = pd.DataFrame(results, columns=['Stock', 'Reversal Levels'])
     df_results.to_csv("support_resistance_levels.csv", index=False)
+    
 
-    display(df_results)
+   

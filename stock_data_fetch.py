@@ -45,7 +45,7 @@ def fetch_stock_data():
     print(f"\n✅ Code 2: Successfully fetched data for {len(symbols) - len(problematic_stocks)} stocks.")
     print(f"⚠️ from Code 2:  Problematic stocks: {problematic_stocks}")
 
-    return final_df
+    return final_df, symbols
 
 if __name__ == "__main__":
     final_df = fetch_stock_data()
