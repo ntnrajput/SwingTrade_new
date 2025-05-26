@@ -1,3 +1,4 @@
+# add stocks from 5000Cr Market cap to 11000Cr
 import os
 import pickle
 import numpy as np
