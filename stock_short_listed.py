@@ -28,7 +28,11 @@ def fetch_stock_data(symbol):
     try:
         df = yf.Ticker(symbol).history(period="10mo")
         if df.empty:
+            print(symbol)
             return None
+
+        
+        
 
         df = df.copy()
 
@@ -68,7 +72,7 @@ def is_bullish(df):
         # macd_ok = (latest["MACD"] > latest["Signal"]) and ((latest["MACD"] - latest["Signal"]) > -0.1)
 
 
-        print(df)
+        # print(df)
 
         return all([candle_ok, ema_ok, rsi_ok, macd_ok])
     except:
