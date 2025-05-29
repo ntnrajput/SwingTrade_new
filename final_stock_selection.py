@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import support_resitance
+from support_resistance import calculate_support_resistance  # Fixed import
 import stock_data_fetch
 
 # Parameters

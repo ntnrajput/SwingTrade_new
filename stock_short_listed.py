@@ -1,4 +1,5 @@
 # add stocks from 5000Cr Market cap to 11000Cr
+# fetch the data for stocks given in list and then identifies the bullish stocks as per the technicals
 import os
 import pickle
 import numpy as np
@@ -32,9 +33,6 @@ def fetch_stock_data(symbol):
         if df.empty:
             print(symbol)
             return None
-
-        
-        
 
         df = df.copy()
 

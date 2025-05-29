@@ -1,3 +1,4 @@
+# fetch the historical data for all stocks that are technically bullish
 import os
 import sys
 import pandas as pd
