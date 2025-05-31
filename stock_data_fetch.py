@@ -8,7 +8,6 @@ import importlib
 
 stock_short_listing = importlib.reload(stock_short_listed)
 
-
 def fetch_stock_data():
     
     symbols = stock_short_listing.get_bullish_stocks()
