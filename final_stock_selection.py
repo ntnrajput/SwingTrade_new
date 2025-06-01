@@ -8,8 +8,8 @@ import os
 
 
 # Parameters
-PROXIMITY_PCT = 2 # Percentage threshold for considering price "close" to a level
-CROSSING_PCT = 1.5  # Percentage threshold for considering price "crossing" a level
+PROXIMITY_PCT = 0.5 # Percentage threshold for considering price "close" to a level
+CROSSING_PCT = 1 # Percentage threshold for considering price "crossing" a level
 
 def send_email_with_attachment(recipient, subject, body, attachment_path):
     sender_email = "criobd.rites@gmail.com"           # Replace with your email
@@ -53,7 +53,7 @@ def find_stocks_near_levels(df, symbols):
         if symbol_data.empty:
             continue
             
-        current_price = symbol_data.iloc[-2]['Close']
+        current_price = symbol_data.iloc[-1]['Close']
         
         # Calculate support/resistance levels
         _, levels = calculate_support_resistance(df, symbol)
@@ -67,7 +67,7 @@ def find_stocks_near_levels(df, symbols):
                 
             diff_pct = abs(current_price - level) / level * 100
             
-            if diff_pct <= PROXIMITY_PCT:
+            if diff_pct <= PROXIMITY_PCT and current_price > level:
                 relation = "Near"
                 if diff_pct <= CROSSING_PCT and current_price > level:
                     relation = "Crossing"

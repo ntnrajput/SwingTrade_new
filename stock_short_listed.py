@@ -59,7 +59,7 @@ def is_bullish(df):
     if df is None or len(df) < 2:
         return False
 
-    latest, prev = df.iloc[-2], df.iloc[-3]
+    latest, prev = df.iloc[-1], df.iloc[-2]
     volume_avg = df['Volume'].mean()
 
     try:
