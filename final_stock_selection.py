@@ -2,10 +2,37 @@ import pandas as pd
 import numpy as np
 from support_resistance import calculate_support_resistance  # Fixed import
 import stock_data_fetch
+import smtplib
+from email.message import EmailMessage
+import os
+
 
 # Parameters
 PROXIMITY_PCT = 2 # Percentage threshold for considering price "close" to a level
 CROSSING_PCT = 1.5  # Percentage threshold for considering price "crossing" a level
+
+def send_email_with_attachment(recipient, subject, body, attachment_path):
+    sender_email = "criobd.rites@gmail.com"           # Replace with your email
+    sender_password = "criobd@123"      # Use App Password if Gmail 2FA is on
+
+    msg = EmailMessage()
+    msg["Subject"] = subject
+    msg["From"] = sender_email
+    msg["To"] = recipient
+    msg.set_content(body)
+
+    # Attach the CSV file
+    with open(attachment_path, "rb") as f:
+        file_data = f.read()
+        filename = os.path.basename(attachment_path)
+        msg.add_attachment(file_data, maintype="application", subtype="octet-stream", filename=filename)
+
+    # Send email via SMTP
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(sender_email, sender_password)
+        smtp.send_message(msg)
+
+
 
 def find_stocks_near_levels(df, symbols):
     """
@@ -79,9 +106,17 @@ def main():
     near_levels_df = near_levels_df.sort_values(by='Distance %')
     
     # Save results
-    near_levels_df.to_csv("stocks_near_levels.csv", index=False)
+    output_file = "stocks_near_levels.csv"
+    near_levels_df.to_csv(output_file, index=False)
     print(f"Found {len(near_levels_df)} stocks near support/resistance levels")
     print(near_levels_df.head())
+
+    send_email_with_attachment(
+        recipient="ntn.rajput89@gmail.com",
+        subject="Stocks Near Support/Resistance Levels",
+        body="Please find attached the latest stock analysis report.",
+        attachment_path=output_file
+    )
     
     return near_levels_df
 
