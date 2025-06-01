@@ -4,8 +4,8 @@ from support_resistance import calculate_support_resistance  # Fixed import
 import stock_data_fetch
 
 # Parameters
-PROXIMITY_PCT = 1.5  # Percentage threshold for considering price "close" to a level
-CROSSING_PCT = 0.5   # Percentage threshold for considering price "crossing" a level
+PROXIMITY_PCT = 2 # Percentage threshold for considering price "close" to a level
+CROSSING_PCT = 1.5  # Percentage threshold for considering price "crossing" a level
 
 def find_stocks_near_levels(df, symbols):
     """
@@ -26,7 +26,7 @@ def find_stocks_near_levels(df, symbols):
         if symbol_data.empty:
             continue
             
-        current_price = symbol_data.iloc[-1]['Close']
+        current_price = symbol_data.iloc[-2]['Close']
         
         # Calculate support/resistance levels
         _, levels = calculate_support_resistance(df, symbol)
@@ -42,7 +42,7 @@ def find_stocks_near_levels(df, symbols):
             
             if diff_pct <= PROXIMITY_PCT:
                 relation = "Near"
-                if diff_pct <= CROSSING_PCT:
+                if diff_pct <= CROSSING_PCT and current_price > level:
                     relation = "Crossing"
                 
                 # Determine if it's support or resistance
