@@ -13,7 +13,7 @@ CROSSING_PCT = 1.5  # Percentage threshold for considering price "crossing" a le
 
 def send_email_with_attachment(recipient, subject, body, attachment_path):
     sender_email = "criobd.rites@gmail.com"           # Replace with your email
-    sender_password = "criobd@123"      # Use App Password if Gmail 2FA is on
+    sender_password = "exel gmiq fcdq rlkl"      # Use App Password if Gmail 2FA is on
 
     msg = EmailMessage()
     msg["Subject"] = subject
