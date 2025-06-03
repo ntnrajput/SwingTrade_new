@@ -32,8 +32,6 @@ def send_email_with_attachment(recipient, subject, body, attachment_path):
         smtp.login(sender_email, sender_password)
         smtp.send_message(msg)
 
-
-
 def find_stocks_near_levels(df, symbols):
     """
     Identify stocks where current price is near or crossing support/resistance levels.

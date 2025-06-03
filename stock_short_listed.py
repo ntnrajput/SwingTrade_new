@@ -63,7 +63,7 @@ def is_bullish(df):
     volume_avg = df['Volume'].mean()
 
     try:
-        candle_ok = (latest['Close'] > (latest['Low'] + 0.6 * (latest['High'] - latest['Low']))) and (latest['Close'] > prev['Close']) and (latest['Open'] < latest ['Close'])
+        candle_ok = (latest['Close'] > (latest['Low'] + 0.6 * (latest['High'] - latest['Low']))) and (latest['Close'] > prev['Close']) and (latest['Open'] < latest ['Close']) and (latest['Low']> prev['Low']) and (latest['High'] > prev['High'])
         ema_ok = (latest["EMA_20"] > latest["EMA_50"] > latest["EMA_200"])
         # ema_ok = (latest["EMA_50"] > latest["EMA_200"]) and ((0.95 * latest["EMA_50"] < latest["EMA_20"] < 1.05 * latest["EMA_50"]) and (latest["EMA_50"] > 1.15 * latest["EMA_200"])) 
         rsi_ok = latest["RSI"] > 45

@@ -1,5 +1,4 @@
 Stock,Current Price,Level,Level Type,Relation,Distance %,Price Above Level
-MANAPPURAM.NS,238.66000366210938,240,Resistance,Near or crossing,0.56,False
-AADHARHFC.NS,444.25,441,Support,Near or crossing,0.74,True
-BANKINDIA.NS,121.94000244140625,121,Support,Near or crossing,0.78,True
-ABBOTINDIA.NS,30455.0,30196,Support,Near or crossing,0.86,True
+FEDERALBNK.NS,206.25,206,Support,Near or crossing,0.12,True
+ELECON.NS,699.9000244140625,702,Resistance,Near or crossing,0.3,False
+BANKINDIA.NS,125.25,126,Resistance,Near or crossing,0.6,False
